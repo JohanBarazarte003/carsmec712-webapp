@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-press:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
+}
+
+body {
+  background-color: #121212; /* Nuestro brand-dark */
+  background-image: url('/textures/noise-texture.png');
+  background-attachment: fixed;
+}
