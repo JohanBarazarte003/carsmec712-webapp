@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 // Iconos corregidos - Oil fue reemplazado por Droplet, y añadimos FaWhatsapp
-import { Wrench, BrainCircuit, Car, Amphora, Settings, ShieldCheck, SprayCan, CardFront}from 'lucide-react';
+import { Wrench, BrainCircuit, Car, Amphora, Settings, ShieldCheck, SprayCan, CarFront} from 'lucide-react';
 import Link from 'next/link';
 import { FaWhatsapp } from 'react-icons/fa'; // Importamos el icono de WhatsApp de otra librería popular
 
@@ -49,9 +49,8 @@ const services = [
   {
     icon: < CarFront size={40} className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
     title: "Detailing",
-    description: " Detailing experto, por dentro y fuera, que restaura, protege y deja su vehículo como nuevo. "
-
-  }
+    description : "Detailing experto, por dentro y fuera, que restaura, protege y deja su vehículo como nuevo."
+  },
 
   
 ];
