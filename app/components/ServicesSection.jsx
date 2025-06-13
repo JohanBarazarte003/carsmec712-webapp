@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 // Iconos corregidos - Oil fue reemplazado por Droplet, y añadimos FaWhatsapp
-import { Wrench, BrainCircuit, Car, Amphora, Settings, ShieldCheck, SprayCan}from 'lucide-react';
+import { Wrench, BrainCircuit, Car, Amphora, Settings, ShieldCheck, SprayCan, CardFront}from 'lucide-react';
 import Link from 'next/link';
 import { FaWhatsapp } from 'react-icons/fa'; // Importamos el icono de WhatsApp de otra librería popular
 
