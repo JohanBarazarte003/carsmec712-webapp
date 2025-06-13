@@ -8,8 +8,8 @@ const HeroSection = () => {
   const whatsappUrl = `https://api.whatsapp.com/send?phone=584140311364&text=¡Hola!%20Quisiera%20pedir%20una%20cita%20o%20hacer%20una%20consulta.`;
 
   // --- LÓGICA PARA ANIMACIÓN DE ESCRITURA ---
-  const text1 = "CarsMec712.";
-  const text2 = "Mecánica en General.";
+  const text1 = "CarsMec712";
+  const text2 = "Mecánica General";
   
   const count1 = useMotionValue(0);
   const rounded1 = useTransform(count1, (latest) => Math.round(latest));
