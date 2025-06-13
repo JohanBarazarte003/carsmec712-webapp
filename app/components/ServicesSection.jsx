@@ -43,9 +43,17 @@ const services = [
   {
     icon: <SprayCan  className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
     title: "Pintura",
-    description: "Trabajamos con los mejores productos.."
+    description: "Renovamos la apariencia de su vehículo con pintura de alta calidad."
+
+  },
+  {
+    icon: < CarFront className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
+    title: "Detailing",
+    description: " Detailing experto, por dentro y fuera, que restaura, protege y deja su vehículo como nuevo. "
 
   }
+
+  
 ];
 
 const ServicesSection = () => {
