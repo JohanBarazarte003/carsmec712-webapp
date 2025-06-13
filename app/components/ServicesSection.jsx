@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 // Iconos corregidos - Oil fue reemplazado por Droplet, y añadimos FaWhatsapp
-import { Wrench, BrainCircuit, Car, Amphora, Settings, ShieldCheck } from 'lucide-react';
+import { Wrench, BrainCircuit, Car, Amphora, Settings, ShieldCheck, SprayCan}from 'lucide-react';
 import Link from 'next/link';
 import { FaWhatsapp } from 'react-icons/fa'; // Importamos el icono de WhatsApp de otra librería popular
 
@@ -39,6 +39,12 @@ const services = [
     icon: <Amphora size={40} className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
     title: "Cambio de Aceite",
     description: "El mantenimiento esencial con los mejores lubricantes para proteger la vida de tu motor."
+  },
+  {
+    icon: <SprayCan  className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
+    title: "Pintura",
+    description: "Trabajamos con los mejores productos.."
+
   }
 ];
 
