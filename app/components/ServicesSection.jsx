@@ -41,13 +41,13 @@ const services = [
     description: "El mantenimiento esencial con los mejores lubricantes para proteger la vida de tu motor."
   },
   {
-    icon: <SprayCan  className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
+    icon: <SprayCan  size={40} className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
     title: "Pintura",
     description: "Renovamos la apariencia de su vehículo con pintura de alta calidad."
 
   },
   {
-    icon: < CarFront className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
+    icon: < CarFront size={40} className="text-brand-red" />, // Icono corregido para 'Cambio de Aceite'
     title: "Detailing",
     description: " Detailing experto, por dentro y fuera, que restaura, protege y deja su vehículo como nuevo. "
 
