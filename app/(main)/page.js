@@ -22,9 +22,23 @@ async function getFeaturedProducts() {
   }
 }
 
+async function getServices() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/services`, { 
+      cache: 'no-store' 
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch (error) {
+    console.error("Error en fetch de getServices:", error);
+    return [];
+  }
+}
+
 
 export default async function Home() {
    const featuredProducts = await getFeaturedProducts();
+   const services = await getServices();
   
 
   return (
@@ -32,7 +46,7 @@ export default async function Home() {
       <HeroSection />
       
       <FeaturedProducts products={featuredProducts} />
-      <ServicesSection />
+      <ServicesSection services={services} />
       <ProjectsSection />
       <ContactSection />
     </>

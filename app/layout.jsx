@@ -1,17 +1,27 @@
-// app/layout.jsx (El nuevo layout raíz)
+// Archivo: app/layout.jsx
 
-// Importa los estilos globales si los tienes en un archivo separado
+import './globals.css'; // Importa tus estilos globales
 
-
+// Aquí puedes definir los metadatos base para todo el sitio
 export const metadata = {
-  title: 'CarsMec712',
-  description: 'La app para tu taller mecánico.',
+  title: {
+    default: 'CarsMec712 - Taller Mecánico de Confianza',
+    template: '%s | CarsMec712',
+  },
+  description: 'Especialistas en mecánica, diagnóstico y performance. Cuidamos tu coche como si fuera nuestro.',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-     <body >{children}</body>
+      {/* 
+        El body no necesita clases aquí si cada layout anidado 
+        maneja su propio fondo, o podemos poner un fondo base.
+        Dejarlo sin clases es más flexible.
+      */}
+      <body>
+        {children}
+      </body>
     </html>
   );
 }

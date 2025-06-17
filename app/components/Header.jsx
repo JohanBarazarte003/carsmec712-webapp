@@ -24,7 +24,7 @@ const Header = () => {
         {/* Menú de Navegación */}
         <div className="hidden md:flex space-x-6 text-brand-light font-bold uppercase">
            <Link href="#servicios" className="hover:text-red-500 transition-colors">Servicios</Link>
-          <Link href="#shop" className="hover:text-brand-red transition-colors">Shop</Link>
+          <Link href="/shop" className="hover:text-brand-red transition-colors">Shop</Link>
           <Link href="#proyectos" className="hover:text-brand-red transition-colors">Proyectos</Link>
           <Link href="#contacto" className="hover:text-brand-red transition-colors">Contacto</Link>
         </div>

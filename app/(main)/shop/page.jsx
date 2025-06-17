@@ -6,7 +6,7 @@ import FilterSidebar from '@/app/components/FilterSidebar';
 // Función para obtener los productos paginados
 async function getPaginatedProducts(searchParams) {
   // Obtenemos el número de página de los parámetros de la URL, por defecto es 1
-  const page = searchParams.page || '1';
+  const page = searchParams['page'] ?? '1';
   
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products?page=${page}`, { 

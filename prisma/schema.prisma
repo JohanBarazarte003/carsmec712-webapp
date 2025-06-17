@@ -10,8 +10,8 @@ generator client {
 }
 
 datasource db {
- provider          = "postgresql"
- url               = env("POSTGRES_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Product {
@@ -23,4 +23,68 @@ model Product {
   category    String    // <-- NUEVO: Para la categoría (ej: "Llantas", "Aceites")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String   @unique // El título del servicio debe ser único
+  description String
+  iconName    String   // Guardaremos el nombre del icono (ej: "Wrench", "BrainCircuit")
+  createdAt   DateTime @default(now())
+}
+
+// --- NUEVO: Modelo de Proyecto ---
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageUrl    String
+  createdAt   DateTime @default(now())
+}
+
+model Customer {
+  id        String    @id @default(cuid())
+  name      String
+  phone     String    @unique // El teléfono debe ser único
+  email     String?   @unique // El email es opcional pero único
+  vehicles  Vehicle[] // Un cliente puede tener varios vehículos
+  createdAt DateTime  @default(now())
+}
+
+// --- NUEVO: Modelo de Vehículo ---
+model Vehicle {
+  id                String              @id @default(cuid())
+  plate             String              @unique // La matrícula es única
+  brand             String              // Marca (ej: Toyota)
+  model             String              // Modelo (ej: Corolla)
+  year              Int                 // Año (ej: 2021)
+  vin               String?             // VIN (opcional)
+  customerId        String              // Clave foránea para relacionarlo con un cliente
+  customer          Customer            @relation(fields: [customerId], references: [id]) // Relación con Customer
+  maintenanceRecords MaintenanceRecord[] // Un vehículo tiene muchos registros
+  createdAt         DateTime            @default(now())
+}
+
+// --- NUEVO: Modelo de Registro de Mantenimiento (La "Historia Médica") ---
+model MaintenanceRecord {
+  id          String    @id @default(cuid())
+  date        DateTime  @default(now())
+  mileage     Int?
+  description String    // Descripción general del trabajo, ej: "Mantenimiento de 50,000 KM"
+  
+  // Lista de servicios realizados (mano de obra)
+  serviceItems Json     // Ej: [{ name: "Cambio de Aceite", price: 20.00 }, { name: "Alineación", price: 30.00 }]
+  
+  // Lista de repuestos utilizados
+  partItems   Json     // Ej: [{ name: "Filtro de Aire", quantity: 1, price: 15.00 }, { name: "Aceite 5W-30", quantity: 4, price: 8.00 }]
+
+  subtotal    Float    // Suma de todos los ítems
+  tax         Float    // Impuesto
+  total       Float    // Subtotal + Impuesto
+
+  status      String   @default("Presupuesto") // Estados: "Presupuesto", "Aprobado", "En Progreso", "Completado", "Cancelado"
+
+  vehicleId   String
+  vehicle     Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
 }
