@@ -13,8 +13,8 @@ const Header = () => {
             <Image
               src="/images/logo.png"
               alt="Logo CarsMec712"
-              width={150}
-              height={150}
+              width={120}
+              height={120}
               className="h-auto"
               priority
             />

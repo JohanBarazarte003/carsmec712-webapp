@@ -8,9 +8,7 @@
 }
 
 body {
-  background-color: #121212; /* Nuestro brand-dark */
-  background-image: url('/textures/noise-texture.png');
-  background-attachment: fixed;
+  background-color: #121212; 
 }
 
 .sr-only {
