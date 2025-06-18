@@ -3,9 +3,11 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
 // --- GET: Para obtener todos los clientes ---
-export async function GET() {
+export async function GET(request) {
+
   try {
     const customers = await prisma.customer.findMany({
+     
       orderBy: { name: 'asc' }, // Ordenamos alfabéticamente por nombre
       include: {
         _count: { // Incluimos un conteo de cuántos vehículos tiene cada cliente

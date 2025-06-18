@@ -10,31 +10,31 @@ const AdminSidebar = () => {
   return (
     <aside className="w-64 bg-brand-dark flex-shrink-0 p-4 flex flex-col border-r border-gray-800">
       <div className="text-center mb-10">
-        <Link href="/admin/dashboard">
+        <Link href="/dashboard">
           <h2 className="text-2xl font-bold text-white">CarsMec<span className="text-brand-red">712</span></h2>
           <p className="text-xs text-gray-400">Panel de Control</p>
         </Link>
       </div>
       <nav className="flex-grow space-y-1">
         <p className="px-4 pt-4 pb-2 text-xs font-semibold text-gray-500 uppercase">General</p>
-        <Link href="/admin/dashboard" className={navLinkClass}>
+        <Link href="/dashboard" className={navLinkClass}>
           <LayoutDashboard size={18} className="mr-3" /> Dashboard
         </Link>
         
         <p className="px-4 pt-4 pb-2 text-xs font-semibold text-gray-500 uppercase">Gestión</p>
         {/* Estos enlaces ahora apuntan al dashboard, que tiene pestañas */}
-        <Link href="/admin/dashboard?tab=products" className={navLinkClass}>
+        <Link href="/dashboard?tab=products" className={navLinkClass}>
           <ShoppingCart size={18} className="mr-3" /> Productos
         </Link>
-        <Link href="/admin/dashboard?tab=services" className={navLinkClass}>
+        <Link href="/dashboard?tab=services" className={navLinkClass}>
           <Wrench size={18} className="mr-3" /> Servicios
         </Link>
-        <Link href="/admin/dashboard?tab=projects" className={navLinkClass}>
+        <Link href="/dashboard?tab=projects" className={navLinkClass}>
           <Package size={18} className="mr-3" /> Proyectos
         </Link>
 
         <p className="px-4 pt-4 pb-2 text-xs font-semibold text-gray-500 uppercase">Clientes</p>
-        <Link href="/admin/customers" className={navLinkClass}>
+        <Link href="/customers" className={navLinkClass}>
           <Users size={18} className="mr-3" /> Clientes y Vehículos
         </Link>
       </nav>

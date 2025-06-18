@@ -22,3 +22,34 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
+
+
+@media print {
+  /* Oculta todo el contenido de la página por defecto */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Luego, hace visible únicamente el área que queremos imprimir y todo lo que esté dentro */
+  #printable-area, #printable-area * {
+    visibility: visible;
+  }
+
+  /* Posiciona el área de impresión en la esquina superior izquierda de la hoja */
+  #printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: none !important;      /* Quita cualquier borde */
+    box-shadow: none !important; /* Quita cualquier sombra */
+    padding: 0 !important;       /* Quita el padding para controlar el margen desde @page */
+    margin: 0 !important;
+  }
+  
+  /* Reglas para la página impresa (tamaño y márgenes) */
+  @page {
+    size: A4; /* Tamaño de hoja estándar */
+    margin: 20mm; /* Márgenes de 2cm en todos los lados */
+  }
+}

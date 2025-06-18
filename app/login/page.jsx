@@ -24,7 +24,7 @@ const LoginPage = () => {
 
     if (data.success) {
       // Si el login es exitoso, redirige al dashboard
-      router.push('/admin/dashboard');
+      router.push('/dashboard');
     } else {
       setError(data.message || 'Error al iniciar sesión.');
     }

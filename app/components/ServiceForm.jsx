@@ -17,7 +17,7 @@ const ServiceForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
-      router.push('/admin/dashboard'); // <- Usamos router
+      router.push('/dashboard'); // <- Usamos router
     router.refresh();     
 
     try {
@@ -32,7 +32,7 @@ const ServiceForm = () => {
         throw new Error(errorData.message || 'No se pudo crear el servicio.');
       }
 
-      router.push('/admin/dashboard');
+      router.push('/dashboard');
       router.refresh();
 
     } catch (err) {

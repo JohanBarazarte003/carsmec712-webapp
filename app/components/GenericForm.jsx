@@ -89,7 +89,7 @@ const GenericForm = ({ entity, fields, existingData }) => {
       }
 
       // 5. Redirige al dashboard si todo fue exitoso
-      router.push('/admin/dashboard');
+      router.push('/dashboard');
       router.refresh();
 
     } catch (err) {

@@ -36,7 +36,7 @@ const VehicleForm = ({ customerId }) => {
       }
 
       // Redirigimos de vuelta a la página de detalle del cliente
-      router.push(`/admin/customers/${customerId}`);
+      router.push(`/customers/${customerId}`);
       router.refresh();
 
     } catch (err) {

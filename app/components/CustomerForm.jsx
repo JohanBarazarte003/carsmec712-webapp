@@ -42,7 +42,7 @@ const CustomerForm = ({ existingCustomer }) => {
       }
 
       // Redirigimos al listado de clientes y refrescamos los datos
-      router.push('/admin/customers');
+      router.push('/customers');
       router.refresh();
 
     } catch (err) {

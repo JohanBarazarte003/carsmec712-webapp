@@ -19,7 +19,7 @@ export async function POST(request) {
       .sign(secret);
 
     // Guardamos el token en la cookie
-    cookies().set('admin_session', token, {
+    (await cookies()).set('admin_session', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60 * 24,

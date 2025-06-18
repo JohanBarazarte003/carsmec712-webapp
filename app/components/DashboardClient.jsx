@@ -26,8 +26,8 @@ const DashboardClient = ({ products, services, projects }) => {
   const [activeTab, setActiveTab] = useState('products');
 
   const tabs = [
-    { name: 'products', label: 'Productos', data: products, columns: productColumns, addLink: '/admin/products/new', addLabel: 'Producto' },
-    { name: 'services', label: 'Servicios', data: services, columns: serviceColumns, addLink: '/admin/services/new', addLabel: 'Servicio' },
+    { name: 'products', label: 'Productos', data: products, columns: productColumns, addLink: '/products/new', addLabel: 'Producto' },
+    { name: 'services', label: 'Servicios', data: services, columns: serviceColumns, addLink: '/services/new', addLabel: 'Servicio' },
     { name: 'projects', label: 'Proyectos', data: projects, columns: projectColumns, addLink: '#', addLabel: 'Proyecto' },
   ];
 

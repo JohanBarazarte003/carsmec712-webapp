@@ -100,7 +100,7 @@ const ProductForm = ({ existingProduct }) => {
       }
 
       // Si todo sale bien, redirigimos al dashboard y refrescamos los datos.
-      router.push('/admin/dashboard');
+      router.push('/dashboard');
       router.refresh();
 
     } catch (err) {
