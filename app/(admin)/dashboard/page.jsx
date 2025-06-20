@@ -24,8 +24,9 @@ async function getServices() {
 }
 
 async function getProjects() {
-  // Aún no hemos creado esta API, así que devolvemos un array vacío
-  return [];
+  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/projects`, { cache: 'no-store' });
+  if (!res.ok) return [];
+  return res.json();
 }
 // --- FIN DE FUNCIONES ---
 
@@ -35,7 +36,7 @@ const DashboardPage = async () => {
   const [productData, services, projects] = await Promise.all([
     getProducts(),
     getServices(),
-    getProjects()
+    getProjects(),
   ]);
 
   // Extraemos el array de productos del objeto que devuelve su API

@@ -1,76 +1,41 @@
-'use client';
-
-import { motion } from 'framer-motion';
+// Archivo: app/components/ProjectsSection.jsx
 import Image from 'next/image';
+import Link from 'next/link';
 
-const projects = [
-  {
-    image: '/images/frenos.jpg', // Reemplaza con tus imágenes
-    title: "Toyota Fortuner",
-    description: "Cambio de frenos"
-  },
-  {
-    image: '/images/cambio.jpg', // Reemplaza con tus imágenes
-    title: "Nissan Patrol",
-    description: "Cambio de Aceite y Filtro"
-  },
-  {
-    image: '/images/cher.jpg', // Reemplaza con tus imágenes
-    title: "Grand Cherokee",
-    description: "Cambio de Frenos"
-  },
-  // {
-  //   image: '/images/proyecto-lancer.jpg', // Añade más si quieres
-  //   title: "Mitsubishi Lancer",
-  //   description: "Sistema de escape y reprogramación"
-  // },
-];
-
-const ProjectsSection = () => {
+const ProjectsSection = ({ projects }) => {
   return (
-    <section id="proyectos" className="py-20 bg-gray-900">
+    <section id="proyectos" className="py-20 bg-brand-dark">
       <div className="container mx-auto px-4 text-center">
-        <motion.h2 
-          className="text-4xl font-bold text-brand-light mb-2"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
-        >
-          Nuestro Arte
-        </motion.h2>
-        <motion.div 
-          className="h-1 w-20 bg-brand-red mx-auto mb-12"
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        ></motion.div>
+        <h2 className="text-4xl font-bold text-brand-light mb-2">Nuestro Arte</h2>
+        <div className="h-1 w-20 bg-brand-red mx-auto mb-12"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-          {projects.map((project, index) => (
-            <motion.div 
-              key={index}
-              className="relative rounded-lg overflow-hidden group h-80"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-            >
-              <Image 
-                src={project.image}
-                alt={project.title}
-                layout="fill"
-                objectFit="cover"
-                className="transform group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <h3 className="text-2xl font-bold text-brand-light">{project.title}</h3>
-                <p className="text-brand-light/80">{project.description}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects && projects.length > 0 ? (
+            projects.map((project) => (
+              <div key={project.id} className="relative rounded-lg overflow-hidden group h-80">
+                <Image 
+                  src={project.imageUrl}
+                  alt={project.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-6">
+                  <h3 className="text-2xl font-bold text-brand-light">{project.title}</h3>
+                  <p className="text-brand-light/80">{project.description}</p>
+                </div>
               </div>
-            </motion.div>
-          ))}
+            ))
+          ) : (
+            <p className="col-span-full text-gray-500">Próximamente mostraremos nuestros mejores proyectos.</p>
+          )}
+        </div>
+        
+        <div className="mt-16">
+          <Link href="/projects" className="bg-brand-red text-white font-bold py-3 px-6 rounded-md text-lg hover:bg-red-700 transition-all duration-300">
+            Ver Galería Completa
+          </Link>
         </div>
       </div>
     </section>

@@ -4,6 +4,11 @@ import FeaturedProducts from '@/app/components/FeaturedProducts'; // Importamos 
 import ProjectsSection from '@/app/components/ProjectsSection';
 import ContactSection from '@/app/components/ContactSection';
 
+async function getFeaturedProjects() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/projects?featured=true`, { cache: 'no-store' });
+  if (!res.ok) return [];
+  return res.json();
+}
 
 async function getFeaturedProducts() {
   try {
@@ -37,9 +42,11 @@ async function getServices() {
 
 
 export default async function Home() {
-   const featuredProducts = await getFeaturedProducts();
-   const services = await getServices();
-  
+  const [featuredProjects, featuredProducts, services] = await Promise.all([
+    getFeaturedProjects(),
+    getFeaturedProducts(),
+    getServices(),
+  ]);
 
   return (
     <>
@@ -47,7 +54,7 @@ export default async function Home() {
       
       <FeaturedProducts products={featuredProducts} />
       <ServicesSection services={services} />
-      <ProjectsSection />
+      <ProjectsSection projects={featuredProjects} />
       <ContactSection />
     </>
   );

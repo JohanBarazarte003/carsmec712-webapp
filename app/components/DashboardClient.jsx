@@ -19,7 +19,14 @@ const serviceColumns = [
   { Header: 'Descripción', accessor: 'description' },
 ];
 
-const projectColumns = []; // Lista para el futuro
+const projectColumns = [
+  { Header: 'Imagen', accessor: 'imageUrl' },
+  { Header: 'Título', accessor: 'title' },
+  { Header: 'Descripción', accessor: 'description' },
+];
+
+
+
 
 // --- Componente Principal del Dashboard ---
 const DashboardClient = ({ products, services, projects }) => {
@@ -28,7 +35,7 @@ const DashboardClient = ({ products, services, projects }) => {
   const tabs = [
     { name: 'products', label: 'Productos', data: products, columns: productColumns, addLink: '/products/new', addLabel: 'Producto' },
     { name: 'services', label: 'Servicios', data: services, columns: serviceColumns, addLink: '/services/new', addLabel: 'Servicio' },
-    { name: 'projects', label: 'Proyectos', data: projects, columns: projectColumns, addLink: '#', addLabel: 'Proyecto' },
+     { name: 'projects', label: 'Proyectos', data: projects, columns: projectColumns, addLink: '/projects/new', addLabel: 'Proyecto' },
   ];
 
   const activeTabData = tabs.find(tab => tab.name === activeTab);
