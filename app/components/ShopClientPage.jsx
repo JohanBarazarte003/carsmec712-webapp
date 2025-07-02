@@ -4,15 +4,23 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import FilterDropdown from './FilterDropdown';
 import ProductModal from './ProductModal';
 import PaginationControls from './PaginationControls'; // Reutilizamos nuestro componente de paginación
+import SearchBar from './SearchBar';
 
-const ShopClientPage = ({ initialProducts, initialTotalPages, initialCurrentPage }) => {
+const ShopClientPage = ({ initialProducts, initialTotalPages, initialCurrentPage, categories }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (
     <>
       {/* El modal para ver los detalles del producto */}
+       <div className="flex flex-col md:flex-row gap-4 mb-8">
+        <FilterDropdown categories={categories} />
+        <div className="flex-grow">
+          <SearchBar />
+        </div>
+      </div>
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
 
       {/* Cuadrícula de productos */}

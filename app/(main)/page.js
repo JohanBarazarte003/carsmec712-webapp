@@ -42,11 +42,11 @@ async function getServices() {
 
 
 export default async function Home() {
-  const [featuredProjects, featuredProducts, services] = await Promise.all([
-    getFeaturedProjects(),
-    getFeaturedProducts(),
-    getServices(),
-  ]);
+  const [featuredProducts, services, featuredProjects] = await Promise.all([
+  getFeaturedProducts(),
+  getServices(),
+  getFeaturedProjects() // Llama a la función correcta para obtener proyectos
+]);
 
   return (
     <>

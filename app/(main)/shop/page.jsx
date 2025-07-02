@@ -1,17 +1,21 @@
 // Archivo: app/(main)/shop/page.jsx
 
 import ShopClientPage from '@/app/components/ShopClientPage';
-import FilterSidebar from '@/app/components/FilterSidebar';
+
 
 // Función para obtener los productos paginados
 async function getPaginatedProducts(searchParams) {
   // Obtenemos el número de página de los parámetros de la URL, por defecto es 1
-  const page = searchParams['page'] ?? '1';
-  
+   const params = new URLSearchParams();
+  params.set('page', searchParams['page'] ?? '1');
+  if (searchParams['category']) {
+    params.set('category', searchParams['category']);
+  }
+  if (searchParams['q']) {
+    params.set('q', searchParams['q']);
+  }
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products?page=${page}`, { 
-      cache: 'no-store' 
-    });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products?${params.toString()}`, { cache: 'no-store' });
 
     if (!res.ok) {
       console.error("Failed to fetch paginated products, status:", res.status);
@@ -25,41 +29,45 @@ async function getPaginatedProducts(searchParams) {
   }
 }
 
+
+async function getCategories() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/categories`, { cache: 'no-store' });
+    if (!res.ok) {
+      console.error("No se pudieron obtener las categorías.");
+      return [];
+    }
+    return res.json();
+  } catch (error) {
+    console.error("Error en fetch de getCategories:", error);
+    return [];
+  }
+}
 // La página en sí es un Server Component asíncrono
-export default async function ShopPage({ searchParams }) {
-  const data = await getPaginatedProducts(searchParams);
+const ShopPage = async ({ searchParams }) => {
+  // Ahora llamamos a ambas funciones en paralelo para más eficiencia
+  const [data, categories] = await Promise.all([
+    getPaginatedProducts(searchParams),
+    getCategories()
+  ]);
+  
+  const { products, totalPages, currentPage } = data;
 
   return (
     <div className="bg-brand-dark min-h-screen pt-24">
-      <div className="container mx-auto px-4 py-24">
-        <h1 className="text-5xl font-bold text-center text-brand-light mb-4">Nuestra Tienda</h1>
-        <div className="h-1 w-24 bg-brand-red mx-auto mb-12"></div>
-
-         {/* --- INICIO DEL NUEVO LAYOUT DE 2 COLUMNAS --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* Columna de Filtros (a la izquierda) */}
-          <div className="lg:col-span-1">
-            <FilterSidebar />
-          </div>
-
-           <div className="lg:col-span-3">
-            <ShopClientPage 
-              initialProducts={data.products} 
-              initialTotalPages={data.totalPages}
-              initialCurrentPage={data.currentPage}
-            />
-          </div>
-        </div>
-        {/* --- FIN DEL NUEVO LAYOUT --- */}
+      <div className="container mx-auto px-4 pb-24">
+        <h1 className="text-4xl md:text-5xl font-bold text-center text-brand-light mb-12 pt-24">Nuestra Tienda</h1>
         
-        {/* Renderizamos el componente cliente, pasándole los datos */}
-        {/* <ShopClientPage 
-          initialProducts={data.products} 
-          initialTotalPages={data.totalPages}
-          initialCurrentPage={data.currentPage}
-        /> */}
+        {/* Le pasamos las categorías al componente cliente */}
+        <ShopClientPage 
+          initialProducts={products} 
+          initialTotalPages={totalPages}
+          initialCurrentPage={currentPage}
+          categories={categories}
+        />
       </div>
     </div>
   );
-}
+};
+
+export default ShopPage;

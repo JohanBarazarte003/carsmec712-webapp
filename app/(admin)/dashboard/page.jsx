@@ -28,15 +28,23 @@ async function getProjects() {
   if (!res.ok) return [];
   return res.json();
 }
+
+async function getCustomers() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/customers`, { cache: 'no-store' });
+  if (!res.ok) return [];
+  return res.json();
+}
 // --- FIN DE FUNCIONES ---
 
 
 const DashboardPage = async () => {
   // Obtenemos todos los datos en paralelo
-  const [productData, services, projects] = await Promise.all([
+  const [productData, services, projects, customers] = await Promise.all([
     getProducts(),
     getServices(),
     getProjects(),
+    getCustomers(),
+    
   ]);
 
   // Extraemos el array de productos del objeto que devuelve su API
@@ -52,6 +60,7 @@ const DashboardPage = async () => {
           products={products}
           services={services}
           projects={projects}
+          customers={customers}
         />
       </div>
     </div>

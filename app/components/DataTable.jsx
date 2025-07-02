@@ -4,6 +4,10 @@
 import Image from 'next/image';
 import ActionButtons from './ActionButtons';
 
+const getNestedValue = (obj, path) => {
+  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+};
+
 const DataTable = ({ title, data, columns, entity }) => {
   return (
     <div className="bg-brand-dark rounded-lg shadow overflow-x-auto">

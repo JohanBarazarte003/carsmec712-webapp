@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import IconPicker from './IconPicker'; // Asegúrate de que este componente exista
 
+
 const GenericForm = ({ entity, fields, existingData }) => {
   const [formData, setFormData] = useState({});
   const [image, setImage] = useState(null);
@@ -45,59 +46,59 @@ const GenericForm = ({ entity, fields, existingData }) => {
   };
 
   // Lógica principal para enviar el formulario
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setError('');
 
-    try {
-      let finalData = { ...formData };
+  try {
+    let finalData = { ...formData };
+    let imageUrl = existingData?.imageUrl;
 
-      // 1. Sube la imagen si es necesario
-      if (fields.some(f => f.name === 'image') && image) {
-        const uploadFormData = new FormData();
-        uploadFormData.append('file', image);
-        uploadFormData.append('UPLOADCARE_PUB_KEY', process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY);
-        uploadFormData.append('UPLOADCARE_STORE', 'auto');
-        
-        const uploadcareRes = await fetch('https://upload.uploadcare.com/base/', { method: 'POST', body: uploadFormData });
-        if (!uploadcareRes.ok) throw new Error('Error al subir la imagen.');
-        
-        const uploadcareData = await uploadcareRes.json();
-        finalData.imageUrl = `https://ucarecdn.com/${uploadcareData.file}/`;
-      }
+    if (fields.some(f => f.name === 'image') && image) {
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', image);
+      uploadFormData.append('UPLOADCARE_PUB_KEY', process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY);
+      uploadFormData.append('UPLOADCARE_STORE', 'auto');
       
-      // 2. Formatea campos numéricos
-      if (finalData.price) {
-        finalData.price = parseFloat(finalData.price);
-      }
-
-      // 3. Determina el método y la URL de la API
-      const method = existingData ? 'PUT' : 'POST';
-      const apiUrl = existingData ? `/api/${entity}s/${existingData.id}` : `/api/${entity}s`;
-
-      // 4. Llama a la API
-      const res = await fetch(apiUrl, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(finalData),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || 'Falló la operación.');
-      }
-
-      // 5. Redirige al dashboard si todo fue exitoso
-      router.push('/dashboard');
-      router.refresh();
-
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsSubmitting(false);
+      const uploadcareRes = await fetch('https://upload.uploadcare.com/base/', { method: 'POST', body: uploadFormData });
+      if (!uploadcareRes.ok) throw new Error('Error al subir la imagen.');
+      
+      const uploadcareData = await uploadcareRes.json();
+      imageUrl = `https://ucarecdn.com/${uploadcareData.file}/`;
     }
-  };
+    
+    finalData.imageUrl = imageUrl;
+    
+    if (finalData.price) {
+      finalData.price = parseFloat(finalData.price);
+    }
+
+    const method = existingData ? 'PUT' : 'POST';
+    const apiUrl = existingData ? `/api/${entity}s/${existingData.id}` : `/api/${entity}s`;
+
+    const res = await fetch(apiUrl, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(finalData),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || 'Falló la operación.');
+    }
+
+    // --- CORRECCIÓN AQUÍ ---
+    // Ahora redirigimos a la pestaña correcta
+    router.push(`/dashboard?tab=${entity}s`);
+    router.refresh();
+
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   
   // --- RENDERIZADO DEL FORMULARIO ---
 

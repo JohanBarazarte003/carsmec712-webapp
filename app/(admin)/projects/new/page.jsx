@@ -3,7 +3,7 @@ import GenericForm from '@/app/components/GenericForm';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
-// Definimos los campos para el formulario de proyectos
+
 const projectFormFields = [
   { name: 'title', label: 'Título del Proyecto', type: 'text', required: true },
   { name: 'description', label: 'Descripción', type: 'textarea', required: true },

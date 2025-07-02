@@ -26,10 +26,10 @@ const formFields = {
     { name: 'iconName', label: 'icono', type: 'icon', required: true, placeholder: 'Ej: Wrench' },
   ],
 
-  project: [ // <-- AÑADE ESTA NUEVA ENTRADA
-    { name: 'title', label: 'Título del Proyecto', type: 'text', required: true },
+   project: [
+    { name: 'title', label: 'Título', type: 'text', required: true },
     { name: 'description', label: 'Descripción', type: 'textarea', required: true },
-    { name: 'image', label: 'Imagen (Opcional: solo para reemplazar)', type: 'file' },
+    { name: 'image', label: 'Imagen (Opcional)', type: 'file', required: false },
   ],
     customer: [
     { name: 'name', label: 'Nombre Completo', type: 'text', required: true },
@@ -66,13 +66,13 @@ maintenance: [
 const EditEntityPage = async ({ params }) => {
   const { entity, id } = params;
 
-  // if (!formFields[entityid]) {
-  //   return (
-  //     <div className="text-center text-red-500 p-8">
-  //       Error: La entidad '{entity}' no es válida o no está configurada para edición.
-  //     </div>
-  //   );
-  // }
+  if (!formFields[entity]) {
+    return (
+      <div className="text-center text-red-500 p-8">
+        Error: La entidad '{entity}' no es válida o no está configurada para edición.
+      </div>
+    );
+  }
 
   const entityData = await getEntityData(entity, id);
   const fields = formFields[entity];
